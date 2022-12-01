@@ -13,6 +13,8 @@ public class Bullet : MonoBehaviour
 
     public GameObject destroyEffect;
 
+    public bool facingRight;
+
     private void Start()
     {
         Invoke("DestroyBullet", lifeTime);
@@ -26,7 +28,10 @@ public class Bullet : MonoBehaviour
             DestroyBullet();
         }
 
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        if(facingRight)
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+        else
+            transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 
     private void DestroyBullet()
