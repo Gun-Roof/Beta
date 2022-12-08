@@ -6,10 +6,9 @@ TagManager:
   tags:
   - Bullet
   - DeadZone
-  - hostJoystick
-  - joystick
-  - hostJoystickA
-  - joystickA
+  - Joystick
+  - FireButton
+  - Host
   layers:
   - Default
   - TransparentFX
