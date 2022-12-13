@@ -6,9 +6,9 @@ TagManager:
   tags:
   - Bullet
   - DeadZone
+  - Button
+  - HostButton
   - Joystick
-  - FireButton
-  - Host
   layers:
   - Default
   - TransparentFX

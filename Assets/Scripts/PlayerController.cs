@@ -7,37 +7,24 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Fire")]
-    [SerializeField] private Button fireButton;
-    [SerializeField] private Gun gun;
-
-    [Header("Move")]
+    [Header("Player Settings")]
+    [SerializeField] private Transform shootPos;
     [SerializeField] private Joystick joystick;
     [SerializeField] private float speed;
 
-    private bool isHost;
-    private bool facingRight = true;
     private Rigidbody2D rb;
     private PhotonView photonView;
     private Vector2 moveInput;
     private Vector2 moveVelocity;
 
+    public bool facingRight = true;
+
     private void Start()
     {
+        joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<Joystick>();
+
         rb = GetComponent<Rigidbody2D>();
         photonView = GetComponent<PhotonView>();
-        joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<Joystick>();
-        fireButton = GameObject.FindGameObjectWithTag("FireButton").GetComponent<Button>();
-        gun = GetComponentInChildren<Gun>();
-
-        fireButton.onClick.AddListener(gun.Shoot);
-
-        isHost = PhotonNetwork.IsMasterClient;
-
-        if (isHost)
-            gameObject.tag = "Host";
-        else
-            gameObject.tag = "Player";
     }
 
     private void Update()
@@ -46,6 +33,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         moveInput = new Vector2(joystick.Horizontal, joystick.Vertical);
+
         moveVelocity = moveInput.normalized * speed;
 
         if (!facingRight && moveInput.x > 0)
@@ -65,6 +53,11 @@ public class PlayerController : MonoBehaviour
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+
+        if(facingRight)
+            shootPos.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        else
+            shootPos.localRotation = Quaternion.Euler(0f, 180f, 0f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

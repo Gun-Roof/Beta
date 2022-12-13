@@ -11,20 +11,13 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float distance;
     [SerializeField] private LayerMask whatIsSolid;
 
-    private GameObject player;
-    private bool isHost;
-
     public GameObject destroyEffect;
+
+    public bool facingRight;
 
     private void Start()
     {
         Invoke("DestroyBullet", lifeTime);
-        isHost = PhotonNetwork.IsMasterClient;
-
-        if (isHost)
-            player = GameObject.FindGameObjectWithTag("Host");
-        else
-            player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
@@ -35,9 +28,9 @@ public class Bullet : MonoBehaviour
             DestroyBullet();
         }
 
-        if (player.transform.localScale.x == 1)
+        if(facingRight)
             transform.Translate(Vector2.right * speed * Time.deltaTime);
-        else if(player.transform.localScale.x == -1)
+        else
             transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 

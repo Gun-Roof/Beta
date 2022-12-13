@@ -49,10 +49,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b84a7db33941bb34496d694276d98e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireButton: {fileID: 0}
-  gun: {fileID: 0}
+  shootPos: {fileID: 2477518396088217881}
   joystick: {fileID: 0}
   speed: 8
+  facingRight: 1
 --- !u!212 &610771609883166384
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -288,6 +288,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bdbcf273a37f4949a838405e69327c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 0}
+  hostButton: {fileID: 0}
+  bulletPrefab: {fileID: 4996194897738857349, guid: eb8a18dcb517a6a43862eab6f8a4b9a0, type: 3}
+  player: {fileID: 2841341239297783566}
   shotPoint: {fileID: 2477518396088217881}
 --- !u!114 &179407445498758137
 MonoBehaviour:
