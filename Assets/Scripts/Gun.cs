@@ -1,75 +1,43 @@
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] private GameObject bullet;
-    [SerializeField] private Joystick hostJoystick;
-    [SerializeField] private Joystick joystick;
+    [Header("Buttons")]
+    [SerializeField] private Button button;
+    [SerializeField] private Button hostButton;
+
+    [Header("Player")]
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform player;
     [SerializeField] private Transform shotPoint;
 
-    [SerializeField] private float startTimeBtwShots;
-    [SerializeField] private float offset;
-
     private bool isHost;
-    private float timeBtwShots;
-    private float rotZ;
 
     private void Start()
     {
-        hostJoystick = GameObject.FindGameObjectWithTag("hostJoystickA").GetComponent<Joystick>();
-        joystick = GameObject.FindGameObjectWithTag("joystickA").GetComponent<Joystick>();
         isHost = PhotonNetwork.IsMasterClient;
+
+        button = GameObject.FindGameObjectWithTag("Button").GetComponent<Button>();
+        hostButton = GameObject.FindGameObjectWithTag("HostButton").GetComponent<Button>();
+
         if (isHost)
         {
-            hostJoystick.gameObject.SetActive(true);
-            joystick.gameObject.SetActive(false);
+            button.gameObject.SetActive(false);
+            hostButton.onClick.AddListener(Shoot);
         }
         else
         {
-            hostJoystick.gameObject.SetActive(false);
-            joystick.gameObject.SetActive(true);
+            hostButton.gameObject.SetActive(false);
+            button.onClick.AddListener(Shoot);
         }
     }
 
-    private void Update()
+    public void Shoot()
     {
-        if (isHost)
-        {
-            if (Mathf.Abs(hostJoystick.Horizontal) > 0.3f || Mathf.Abs(hostJoystick.Vertical) > 0.3f)
-                rotZ = Mathf.Atan2(hostJoystick.Vertical, hostJoystick.Horizontal) * Mathf.Rad2Deg;
-        }
-        else
-        {
-            if (Mathf.Abs(joystick.Horizontal) > 0.3f || Mathf.Abs(joystick.Vertical) > 0.3f)
-                rotZ = Mathf.Atan2(joystick.Vertical, joystick.Horizontal) * Mathf.Rad2Deg;
-        }
-
-        transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
-
-        if (timeBtwShots <= 0)
-        {
-            if (isHost)
-            {
-                if (hostJoystick.Horizontal != 0 || hostJoystick.Vertical != 0)
-                    Shoot();
-            }
-            else
-            {
-                if (joystick.Horizontal != 0 || joystick.Vertical != 0)
-                    Shoot();
-            }
-        }
-        else
-            timeBtwShots -= Time.deltaTime;
-    }
-
-    private void Shoot()
-    {
+        bulletPrefab.GetComponent<Bullet>().facingRight = player.GetComponent<PlayerController>().facingRight;
         PhotonNetwork.Instantiate(Path.Combine("Bullet"), shotPoint.position, transform.rotation);
-        timeBtwShots = startTimeBtwShots;
     }
 }

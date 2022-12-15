@@ -49,9 +49,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b84a7db33941bb34496d694276d98e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hostJoystick: {fileID: 0}
+  shootPos: {fileID: 2477518396088217881}
   joystick: {fileID: 0}
   speed: 8
+  facingRight: 1
+  dead: 0
+  hostDead: 0
 --- !u!212 &610771609883166384
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -217,8 +220,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4071020276582729148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.874, y: -0.047, z: 0}
-  m_LocalScale: {x: 1, y: 0.2, z: 1}
+  m_LocalPosition: {x: 0.47, y: -0.03, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children:
   - {fileID: 2477518396088217881}
   m_Father: {fileID: 2841341239297783566}
@@ -264,7 +267,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
+  m_Sprite: {fileID: -7349882584872989000, guid: 512307878bd04cb46842319fc141a3a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -287,12 +290,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bdbcf273a37f4949a838405e69327c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 7872333067207849340, guid: ea7fb6fa1e827a24cb3823b8a03386c7, type: 3}
-  hostJoystick: {fileID: 0}
-  joystick: {fileID: 0}
+  button: {fileID: 0}
+  hostButton: {fileID: 0}
+  bulletPrefab: {fileID: 4996194897738857349, guid: eb8a18dcb517a6a43862eab6f8a4b9a0, type: 3}
+  player: {fileID: 2841341239297783566}
   shotPoint: {fileID: 2477518396088217881}
-  startTimeBtwShots: 3
-  offset: 0
 --- !u!114 &179407445498758137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,10 +357,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7048425494918545500}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 1.762, y: 0.198, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.70710576, w: 0.70710784}
+  m_LocalPosition: {x: 1.7, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 372334775238543744}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
