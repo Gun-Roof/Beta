@@ -53,6 +53,8 @@ MonoBehaviour:
   joystick: {fileID: 0}
   speed: 8
   facingRight: 1
+  dead: 0
+  hostDead: 0
 --- !u!212 &610771609883166384
 SpriteRenderer:
   m_ObjectHideFlags: 0

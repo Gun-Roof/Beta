@@ -16,11 +16,26 @@ public class PlayerController : MonoBehaviour
     private PhotonView photonView;
     private Vector2 moveInput;
     private Vector2 moveVelocity;
+    private bool isHost;
+
+    public bool facingRight = true;
+    public bool dead;
+    public bool hostDead;
 
     public bool facingRight = true;
 
     private void Start()
     {
+
+        dead = false;
+        hostDead = false;
+
+        isHost = PhotonNetwork.IsMasterClient;
+        if (isHost)
+            gameObject.tag = "Host";
+        else
+            gameObject.tag = "Player";
+
         joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<Joystick>();
 
         rb = GetComponent<Rigidbody2D>();
@@ -65,6 +80,12 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("DeadZone"))
         {
             transform.position = new Vector3(0f, -1.7f, 0f);
+
+            if (isHost)
+                hostDead = true;
+            else
+                dead = true;
+
         }
     }
 }
