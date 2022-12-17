@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Joystick hostJoystick;
     [SerializeField] private Joystick joystick;
     [SerializeField] private float speed;
+    [SerializeField] bool PcControler;
 
     private bool isHost;
     private bool dead = false;
@@ -39,13 +40,23 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        speed = PlayerPrefs.GetFloat("Playerspeed");
         if(!photonView.IsMine)
             return;
-
-        if(isHost)
-            moveInput = new Vector2(hostJoystick.Horizontal, hostJoystick.Vertical);
+        if (PcControler)
+        {
+            float ver = Input.GetAxis("Vertical");
+            float hor = Input.GetAxis("Horizontal");
+            moveInput = new Vector2(hor, ver);      
+        }
         else
-            moveInput = new Vector2(joystick.Horizontal, joystick.Vertical);
+        {
+            if (isHost)
+                moveInput = new Vector2(hostJoystick.Horizontal, hostJoystick.Vertical);
+            else
+                moveInput = new Vector2(joystick.Horizontal, joystick.Vertical);
+        }
+        
 
         moveVelocity = moveInput.normalized * speed;
 
@@ -76,4 +87,5 @@ public class PlayerController : MonoBehaviour
             dead = true;
         }
     }
+   
 }
