@@ -22,11 +22,8 @@ public class PlayerController : MonoBehaviour
     public bool dead;
     public bool hostDead;
 
-    public bool facingRight = true;
-
     private void Start()
     {
-
         dead = false;
         hostDead = false;
 
@@ -80,12 +77,10 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("DeadZone"))
         {
             transform.position = new Vector3(0f, -1.7f, 0f);
-
             if (isHost)
                 hostDead = true;
             else
                 dead = true;
-
         }
     }
 }
