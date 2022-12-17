@@ -61,7 +61,7 @@ public class Gun : MonoBehaviour
                     rotZ = Mathf.Atan2(joystick.Vertical, joystick.Horizontal) * Mathf.Rad2Deg;
             }
         }
-       
+
 
         transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
 
@@ -91,8 +91,8 @@ public class Gun : MonoBehaviour
                 {
                         PhotonNetwork.Instantiate(Path.Combine("Bullet"), shotPoint.position, Quaternion.Euler(0, 0, Random.Range(- 30, 30)));
                 }
-                
-                
+
+
                 break;
             case "gun2":
                 PhotonNetwork.Instantiate(Path.Combine("Bullet"), shotPoint.position, transform.rotation);
@@ -104,7 +104,7 @@ public class Gun : MonoBehaviour
                 PhotonNetwork.Instantiate(Path.Combine("Bullet"), shotPoint.position, transform.rotation);
                 break;
         }
-        
+
         timeBtwShots = startTimeBtwShots;
     }
     private void OnTriggerEnter2D(Collider2D collision)

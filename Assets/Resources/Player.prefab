@@ -49,10 +49,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b84a7db33941bb34496d694276d98e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hostJoystick: {fileID: 0}
+  shootPos: {fileID: 2477518396088217881}
   joystick: {fileID: 0}
   speed: 8
   PcControler: 0
+  facingRight: 1
+  dead: 0
+  hostDead: 0
 --- !u!212 &610771609883166384
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -289,9 +292,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bdbcf273a37f4949a838405e69327c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 7872333067207849340, guid: ea7fb6fa1e827a24cb3823b8a03386c7, type: 3}
-  hostJoystick: {fileID: 0}
-  joystick: {fileID: 0}
+  button: {fileID: 0}
+  hostButton: {fileID: 0}
+  bulletPrefab: {fileID: 4996194897738857349, guid: eb8a18dcb517a6a43862eab6f8a4b9a0, type: 3}
+  player: {fileID: 2841341239297783566}
   shotPoint: {fileID: 2477518396088217881}
   gun1: {fileID: -7349882584872989000, guid: 512307878bd04cb46842319fc141a3a9, type: 3}
   gun2: {fileID: -3476979527478288156, guid: 512307878bd04cb46842319fc141a3a9, type: 3}
@@ -388,10 +392,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7048425494918545500}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 1.762, y: 0.198, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.70710576, w: 0.70710784}
+  m_LocalPosition: {x: 1.7, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 372334775238543744}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}

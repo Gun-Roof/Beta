@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Joystick hostJoystick;
@@ -18,7 +17,6 @@ public class PlayerController : MonoBehaviour
     private PhotonView photonView;
     private Vector2 moveInput;
     private Vector2 moveVelocity;
-
     private void Start()
     {
         hostJoystick = GameObject.FindGameObjectWithTag("hostJoystick").GetComponent<Joystick>();
@@ -56,7 +54,7 @@ public class PlayerController : MonoBehaviour
             else
                 moveInput = new Vector2(joystick.Horizontal, joystick.Vertical);
         }
-        
+
 
         moveVelocity = moveInput.normalized * speed;
 
@@ -65,12 +63,10 @@ public class PlayerController : MonoBehaviour
         else if (facingRight && moveInput.x < 0)
             Flip();
     }
-
     private void FixedUpdate()
     {
         rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
     }
-
     private void Flip()
     {
         facingRight = !facingRight;
@@ -78,7 +74,6 @@ public class PlayerController : MonoBehaviour
         Scaler.x *= -1;
         transform.localScale = Scaler;
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("DeadZone"))
@@ -87,5 +82,5 @@ public class PlayerController : MonoBehaviour
             dead = true;
         }
     }
-   
+
 }
