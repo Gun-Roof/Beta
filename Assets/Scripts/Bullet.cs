@@ -6,27 +6,32 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] private GameObject destroyEffect;
     [SerializeField] private float speed;
     [SerializeField] private float lifeTime;
     [SerializeField] private float distance;
     [SerializeField] private LayerMask whatIsSolid;
 
-    public GameObject destroyEffect;
+    public bool facingRight;
 
     private void Start()
     {
-        Invoke("DestroyBullet", lifeTime);
+       Invoke("DestroyBullet", lifeTime);
     }
 
     private void Update()
     {
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, distance, whatIsSolid);
-        if (hitInfo.collider != null)
+
+        if (lifeTime < 0)
         {
             DestroyBullet();
         }
 
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        if(facingRight)
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+        else
+            transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 
     private void DestroyBullet()

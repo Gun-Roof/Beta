@@ -21,23 +21,23 @@ public class Launcher : MonoBehaviourPunCallbacks
     private void Start()
     {
         instance = this;
+        PhotonNetwork.GameVersion = "0.1.8";
         PhotonNetwork.ConnectUsingSettings();
-        PhotonNetwork.GameVersion = "0.12";
 
-        Debug.Log("Присоединяемся к серверу");
+        Debug.Log("Connecting to master");
         MenuManager.instance.OpenMenu("loading");
     }
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log("Присоединились к серверу");
+        Debug.Log("Connected to master");
         PhotonNetwork.JoinLobby();
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     public override void OnJoinedLobby()
     {
-        Debug.Log("Присоединились к лобби");
+        Debug.Log("Connected to lobby");
         MenuManager.instance.OpenMenu("title");
         PhotonNetwork.NickName = "Player" + Random.Range(0, 1000).ToString();
     }
@@ -120,5 +120,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player player)
     {
         Instantiate(_playerNamePrefab, _playerList).GetComponent<PlayerListItem>().SetUp(player);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
