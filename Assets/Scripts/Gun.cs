@@ -10,7 +10,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private Bullet bullet;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Joystick joystick;
-    [SerializeField] private Transform shotPoint;
+    [SerializeField] private GameObject[] shotPoints;
     [SerializeField] private Sprite gun1, gun2, gun3, gun4;
 
     [Header("Bullet settings")]
@@ -33,28 +33,6 @@ public class Gun : MonoBehaviour
     private void Update()
     {
         bullet.facingRight = player.facingRight;
-
-        //if (PcControler)
-        //{
-        //    Vector3 mousepoint = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
-        //    Vector3 diff = mousepoint - transform.position;
-        //    diff.Normalize();
-        //    rotZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-        //}
-        //else
-        //{
-        //    if (isHost)
-        //    {
-        //        if (Mathf.Abs(hostJoystick.Horizontal) > 0.3f || Mathf.Abs(hostJoystick.Vertical) > 0.3f)
-        //            rotZ = Mathf.Atan2(hostJoystick.Vertical, hostJoystick.Horizontal) * Mathf.Rad2Deg;
-        //    }
-        //    else
-        //    {
-        //        if (Mathf.Abs(joystick.Horizontal) > 0.3f || Mathf.Abs(joystick.Vertical) > 0.3f)
-        //            rotZ = Mathf.Atan2(joystick.Vertical, joystick.Horizontal) * Mathf.Rad2Deg;
-        //    }
-        //}
-
         transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
 
         if (timeBtwShots <= 0)
@@ -68,8 +46,22 @@ public class Gun : MonoBehaviour
 
     private void Shoot(string gun)
     {
+        Transform shotPoint;
+        shotPoints = GameObject.FindGameObjectsWithTag("sp");    
+        
+            if (Vector3.Distance(shotPoints[0].transform.position, transform.position) > 0.5f)
+            {
+            shotPoint = shotPoints[1].transform;
+            }
+            else
+            {
+            shotPoint = shotPoints[0].transform;
+
+        }        
+            Debug.Log(shotPoint);
         switch (gun)
         {
+            
             case "gun1":
                 for (int i = 0; i < 4; i++)
                 {

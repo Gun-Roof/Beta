@@ -28,5 +28,6 @@ public class GunSpawn : MonoBehaviour
     {
         string GunName = Guns[Random.Range(0, 3)].name;
         gun = PhotonNetwork.Instantiate(GunName, new Vector3(Random.Range(-7f, 7f), Random.Range(-3.9f, -1.4f), 0), transform.rotation);
+        Destroy(gun,DeleteTime);
     }
 }

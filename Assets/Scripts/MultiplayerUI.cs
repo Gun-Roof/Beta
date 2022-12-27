@@ -52,7 +52,8 @@ public class MultiplayerUI : MonoBehaviour
     public void Relive()
     {
         player.dead = false;
-        player.transform.position = new Vector3(0f, -1.7f, 0f);
+        // player.transform.position = new Vector3(0f, -1.7f, 0f);
+        PhotonNetwork.LoadLevel(1);
         deadPanel.SetActive(false);
     }
 }
