@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Reclining : MonoBehaviour
 {
-    // Start is called before the first frame update
-    // Start is called before the first frame update
     Rigidbody2D rb;
     bool otkid = false;
     [SerializeField] float cor;
