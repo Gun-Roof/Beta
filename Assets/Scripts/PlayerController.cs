@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [Header("Sprites")]
     [SerializeField] private Sprite bluePlayer;
     [SerializeField] private Sprite redPlayer;
+    PlayerManager pm;
     [SerializeField] GameObject player;
      [SerializeField]GameObject[] players;
     [SerializeField] GameObject gun;
@@ -93,12 +94,16 @@ public class PlayerController : MonoBehaviour
                 players[1].GetComponent<SpriteRenderer>().sprite = redPlayer;
             }            
         }
-        if (players.Length>2)
+        if (players.Length>2&& PhotonNetwork.PlayerList.Length == 2)
         {
             for (int i = 2; i < players.Length; i++)
             {
                 Destroy(players[i]);
             }
+        }
+         if (players.Length < 2 && PhotonNetwork.PlayerList.Length == 2)
+        {
+            pm.CreateController();
         }
         //if (transform.childCount == 0)
         //{

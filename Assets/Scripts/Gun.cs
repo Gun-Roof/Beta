@@ -10,7 +10,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private Bullet bullet;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Joystick joystick;
-    [SerializeField] private GameObject[] shotPoints;
+    [SerializeField] private GameObject[] shotPoints,players;
     [SerializeField] private Sprite gun1, gun2, gun3, gun4;
 
     [Header("Bullet settings")]
@@ -32,6 +32,7 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
+        
         bullet.facingRight = player.facingRight;
         transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
 
@@ -47,15 +48,18 @@ public class Gun : MonoBehaviour
     private void Shoot(string gun)
     {
         Transform shotPoint;
-        shotPoints = GameObject.FindGameObjectsWithTag("sp");    
-        
-            if (Vector3.Distance(shotPoints[0].transform.position, transform.position) > 0.5f)
+        shotPoints = GameObject.FindGameObjectsWithTag("sp");
+        Debug.Log(Vector3.Distance(shotPoints[0].transform.position, transform.GetChild(0).transform.position));
+            if (Vector3.Distance(shotPoints[0].transform.position, transform.GetChild(0).transform.position)>0)
             {
             shotPoint = shotPoints[1].transform;
-            }
+            Debug.Log(Vector3.Distance(shotPoints[0].transform.position, transform.GetChild(0).transform.position));
+            Debug.Log("true");
+        }
             else
             {
             shotPoint = shotPoints[0].transform;
+            Debug.Log("else");
 
         }        
             Debug.Log(shotPoint);
@@ -85,33 +89,38 @@ public class Gun : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "gun1")
+        players = GameObject.FindGameObjectsWithTag("Player");
+        if (Vector3.Distance(players[0].transform.GetChild(0).transform.position, players[1].transform.GetChild(0).transform.position) > 0.8f )
         {
-            GetComponent<SpriteRenderer>().sprite = gun1;
-            gun = "gun1";
-            startTimeBtwShots = 4;
-            Destroy(collision.gameObject);
-        }
-        if (collision.tag == "gun2")
-        {
-            GetComponent<SpriteRenderer>().sprite = gun2;
-            gun = "gun2";
-            startTimeBtwShots = 2;
-            Destroy(collision.gameObject);
-        }
-        if (collision.tag == "gun3")
-        {
-            GetComponent<SpriteRenderer>().sprite = gun3;
-            gun = "gun3";
-            startTimeBtwShots = 0.5f;
-            Destroy(collision.gameObject);
-        }
-        if (collision.tag == "gun4")
-        {
-            GetComponent<SpriteRenderer>().sprite = gun4;
-            gun = "gun4";
-            startTimeBtwShots = 3;
-            Destroy(collision.gameObject);
-        }
+            if (collision.tag == "gun1")
+            {
+                GetComponent<SpriteRenderer>().sprite = gun1;
+                gun = "gun1";
+                startTimeBtwShots = 4;
+                Destroy(collision.gameObject);
+            }
+            if (collision.tag == "gun2")
+            {
+                GetComponent<SpriteRenderer>().sprite = gun2;
+                gun = "gun2";
+                startTimeBtwShots = 2;
+                Destroy(collision.gameObject);
+            }
+            if (collision.tag == "gun3")
+            {
+                GetComponent<SpriteRenderer>().sprite = gun3;
+                gun = "gun3";
+                startTimeBtwShots = 0.5f;
+                Destroy(collision.gameObject);
+            }
+            if (collision.tag == "gun4")
+            {
+                GetComponent<SpriteRenderer>().sprite = gun4;
+                gun = "gun4";
+                startTimeBtwShots = 3;
+                Destroy(collision.gameObject);
+            }
+        }       
+        
     }
 }
