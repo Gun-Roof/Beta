@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        
+        Debug.Log(PhotonNetwork.GetPing());
         if(!photonView.IsMine)
             return;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
